@@ -3,7 +3,10 @@ package com.amoh;
 import com.amoh.dao.StuAttRepository;
 import com.amoh.entity.Stuattendance;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -46,6 +49,7 @@ public class HomeController {
         modelAndView.setViewName("idstu.html");
         return modelAndView;
     }
+
 
 
 //    // Get StuAtt by nameId

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <br>
+        <h3>Welcome Doctor .: </h3>
+        <br><br>
+
+        <form action="/admin/savedoc" th:objecte="${S}" method="POST">
+            <input type="text" placeholder="Choose Section" th:field="${doctor.username}">
+
+            <select th:field="${course.theDoctor}" >
+                <option
+                        th:each="doctor : ${allDoctors}"
+                        th:value="${doctor.doc_id}"
+                        th:text="${doctor.username}" >
+                </option>
+            </select>
+            <select th:field="${course.students}" multiple="multiple">
+                <option
+                        th:each="stu : ${allStudents}"
+                        th:value="${stu.stu_id}"
+                        th:text="${stu.stu_id}" >
+                </option>
+            </select>
+            <input type="text" placeholder="Choose NameStu" th:field="${doctor.active}">
+            <input type="text" placeholder="Choose CourID" th:field="${doctor.password}">
+            <button type="submit">Create Doctor</button>
+        </form>
+    </div>
+</body>
+</html>
+

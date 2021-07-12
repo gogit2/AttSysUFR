@@ -1,7 +1,9 @@
 package com.amoh;
 
+import com.amoh.dao.StudentRepository;
 import com.amoh.dao.UserRepository;
 import com.amoh.entity.Stuattendance;
+import com.amoh.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +31,15 @@ public class MainController {
     public @ResponseBody Iterable<Stuattendance> getAllUsers() {
         return userRepository.findAll();
     }
+
+    @Autowired
+    StudentRepository stuRepo;
+    @GetMapping(path="/allstu")
+    public @ResponseBody Iterable<Student> getAllStudents() {
+        return stuRepo.findAll();
+    }
+
+
 
     /* // COMMENTS
     * //

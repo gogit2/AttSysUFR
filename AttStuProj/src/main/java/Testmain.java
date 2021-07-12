@@ -1,12 +1,20 @@
+import com.amoh.dao.StudentRepository;
+import com.amoh.entity.Course;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class Testmain {
 
     public static void main(String[] args) {
+
+       /**
         Set<String> attenceList = new TreeSet();
         String s = null;
         try {
@@ -48,6 +56,19 @@ public class Testmain {
             System.exit(-1);
             e.printStackTrace();
         }
+        */
+
+//       @Autowired
+//       StudentRepository stuRepo;
+//
+//       @Query(value = "SELECT * FROM stuattendance.course")
+//       private static List<Course>();
+//
+//       @Query(value = "SELECT * FROM stuattendance.course")
+//       List <Course> courses;
+//       System.out.println(sql);
+
+
     }
 }
 
