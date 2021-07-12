@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,7 +40,8 @@ public class DoctorController {
         List<String> secList = new ArrayList<>();
         allAttendances.get(1).getSection();
         for (Attendance att : allAttendances) {
-            secList.add(att.getSection());
+            if (!secList.contains(att.getSection()))
+                    secList.add(att.getSection());
         }
         List<Course> courseList = (List<Course>) courRepo.findAll();
         List<Student> studentList = (List<Student>) stuRepo.findAll();
@@ -53,9 +55,17 @@ public class DoctorController {
     }
 
     @PostMapping("/saveatt")
-    public String saveAttendancePage(Model model, Attendance attendance){
-        // save a doctor to the db
-        attRepo.save(attendance);
+    public String saveAttendancePage(Model model, /**@RequestParam List<Student> studentList,**/ Attendance attendance){
+        // save an attendance to the db
+        Course course = attendance.getCourse();
+        String secName = attendance.getSection();
+        List<Student> studentList = (List<Student>) stuRepo.findAll();
+
+        for (int i=0; i< studentList.size(); i++) {
+            Attendance tempAttendance = new Attendance(secName,studentList.get(i),course);
+            attRepo.save(tempAttendance);
+        }
+//        attRepo.save(attendance);
         return "redirect:/doctor/newatt";
     }
 

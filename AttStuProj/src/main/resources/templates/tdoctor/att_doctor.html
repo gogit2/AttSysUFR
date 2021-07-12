@@ -36,7 +36,7 @@
                         th:text="${cour.courname}" >
                 </option>
             </select>
-            <select th:field="${attendance.student}">
+            <select th:field="${attendance.student}" multiple="multiple">
                 <option
                         th:each="stu : ${students}"
                         th:value="${stu.stu_id}"
