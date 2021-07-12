@@ -20,26 +20,32 @@
         <h3>Welcome Doctor .: </h3>
         <br><br>
 
-        <form action="/admin/savedoc" th:objecte="${S}" method="POST">
-            <input type="text" placeholder="Choose Section" th:field="${doctor.username}">
+        <form action="/doctor/saveatt" th:objecte="${attendance}" method="POST">
 
-            <select th:field="${course.theDoctor}" >
+            <select th:field="${attendance.section}" >
                 <option
-                        th:each="doctor : ${allDoctors}"
-                        th:value="${doctor.doc_id}"
-                        th:text="${doctor.username}" >
+                        th:each="sec : ${sections}"
+                        th:value="${sec}"
+                        th:text="${sec}" >
                 </option>
             </select>
-            <select th:field="${course.students}" multiple="multiple">
+            <select th:field="${attendance.course}">
                 <option
-                        th:each="stu : ${allStudents}"
+                        th:each="cour : ${courses}"
+                        th:value="${cour.cour_id}"
+                        th:text="${cour.courname}" >
+                </option>
+            </select>
+            <select th:field="${attendance.student}">
+                <option
+                        th:each="stu : ${students}"
                         th:value="${stu.stu_id}"
                         th:text="${stu.stu_id}" >
                 </option>
             </select>
-            <input type="text" placeholder="Choose NameStu" th:field="${doctor.active}">
-            <input type="text" placeholder="Choose CourID" th:field="${doctor.password}">
-            <button type="submit">Create Doctor</button>
+<!--            <input type="text" placeholder="Choose NameStu" th:field="${doctor.active}">-->
+<!--            <input type="text" placeholder="Choose CourID" th:field="${doctor.password}">-->
+            <button type="submit">Submit Attendance</button>
         </form>
     </div>
 </body>
