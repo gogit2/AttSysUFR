@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -44,7 +48,8 @@ public class DoctorController {
                     secList.add(att.getSection());
         }
         List<Course> courseList = (List<Course>) courRepo.findAll();
-        List<Student> studentList = (List<Student>) stuRepo.findAll();
+//        List<Student> studentList = (List<Student>) stuRepo.findAll();
+        List<Student> studentList = getListStuFR();
 
         model.addAttribute("attendance",attendance);
         model.addAttribute("attendances",allAttendances);
@@ -60,6 +65,7 @@ public class DoctorController {
         Course course = attendance.getCourse();
         String secName = attendance.getSection();
         List<Student> studentList = (List<Student>) stuRepo.findAll();
+//        List<Student> studentList = getListStuFR();
 
         for (int i=0; i< studentList.size(); i++) {
             Attendance tempAttendance = new Attendance(secName,studentList.get(i),course);
@@ -67,6 +73,65 @@ public class DoctorController {
         }
 //        attRepo.save(attendance);
         return "redirect:/doctor/newatt";
+    }
+
+//    @GetMapping("/stufrlist")
+//    public String redirectToFormAtt(){
+//        return "redirect:/doctor/newatt";
+//    }
+
+    @GetMapping("/rtfatt")
+    public ModelAndView redirectToFormAtt(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("tdoctor/clk_todoFR_doctor.html");
+        return modelAndView;
+    }
+
+    @PostMapping( "liststufr")
+    public List<Student> getListStuFR(){
+
+        List<Student> stuFRlist = new ArrayList<>();
+
+        List<String> attenceList = new ArrayList<>();
+        String s = null;
+        try {
+
+            Process p = Runtime.getRuntime().exec("python ./EncodeImages.py");
+
+            BufferedReader stdInput = new BufferedReader(new
+                    InputStreamReader(p.getInputStream()));
+
+            BufferedReader stdError = new BufferedReader(new
+                    InputStreamReader(p.getErrorStream()));
+
+            while ((s = stdInput.readLine()) != null) {
+                String l = s.replaceAll("\\p{P}", "");
+                if(attenceList.contains(l)) {
+                    System.out.println("Already added ");
+                }else {
+                    attenceList.add(l);
+                }
+            }
+//            while ((s = stdError.readLine()) != null) {
+//                System.out.println(s);
+//            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(-1);
+            e.printStackTrace();
+        }
+
+        List<String> attList = new ArrayList<>();
+        String str =  attenceList.get(0);
+        String[] arrOfStr = str.split(" ");
+        for (String a : arrOfStr) {
+            attList.add(a);
+            Student tempStudent = stuRepo.findByStuid(Integer.parseInt(a));
+            stuFRlist.add(tempStudent);
+            System.out.print(tempStudent.getStu_id()+", ");
+        }
+        return stuFRlist;
     }
 
 }

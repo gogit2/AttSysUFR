@@ -17,8 +17,20 @@
 
     <div class="container">
         <br>
-        <h3>Welcome Doctor .: </h3>
+        <h4>Welcome Doctor .: </h4>
+        <br>
+        <h5>FR is done</h5>
+        <br>
+        <h5> Click button below to submit ATTENDANCE</h5>
         <br><br>
+
+<!--        <form  action="/doctor/newatt" th:objecte="${students}" method="Get">-->
+<!--            <input th:type="hidden"  th:object="${@doctorController.getListStuFR()}" />-->
+<!--            <button type="submit">Start Encoding </button>-->
+<!--        </form>-->
+        <p th:object="${@doctorController.getListStuFR()}" />
+
+        <br>
 
         <form action="/doctor/saveatt" th:objecte="${attendance}" method="POST">
 
