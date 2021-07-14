@@ -23,11 +23,14 @@
         <br>
         <h5>And Submitting Attendance .: </h5>
         <br><br>
-        <form  action="/doctor/newatt" method="Get">
+        <form  action="/doctor/newatt" >
             <button type="submit">Click to Start FR </button>
         </form>
 
         <br><br>
+
+        <p th:object="${@doctorController.getListStuFR()}" />
+        <br>
 
     </div>
 </body>

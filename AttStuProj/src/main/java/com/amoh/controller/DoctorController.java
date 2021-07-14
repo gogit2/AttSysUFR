@@ -3,7 +3,6 @@ package com.amoh.controller;
 import com.amoh.dao.*;
 import com.amoh.entity.Attendance;
 import com.amoh.entity.Course;
-import com.amoh.entity.Doctor;
 import com.amoh.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,14 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -36,6 +33,30 @@ public class DoctorController {
 
     @Autowired
     StudentRepository stuRepo;
+
+
+//    F:\PythonProjects\proJ\AttStuProj\src\main\resources\static\project\doctor.html
+
+
+    @GetMapping("/")
+    public String homeDoctor(){
+        return "tdoctor/homedoc";
+    }
+
+    @GetMapping("/l")
+    public ModelAndView lDoctor(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("project/login");
+        return modelAndView;
+    }
+
+    @GetMapping("/d")
+    public ModelAndView hDoctor(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("project/doctor");
+        return modelAndView;
+    }
+
 
     @GetMapping("/newatt") // show form to enter a new doctor
     public String displayAttendancePage(Model model){
@@ -64,15 +85,16 @@ public class DoctorController {
         // save an attendance to the db
         Course course = attendance.getCourse();
         String secName = attendance.getSection();
-        List<Student> studentList = (List<Student>) stuRepo.findAll();
-//        List<Student> studentList = getListStuFR();
+//        List<Student> studentList = (List<Student>) stuRepo.findAll();
+        List<Student> studentList = getListStuFR();
 
         for (int i=0; i< studentList.size(); i++) {
             Attendance tempAttendance = new Attendance(secName,studentList.get(i),course);
             attRepo.save(tempAttendance);
         }
 //        attRepo.save(attendance);
-        return "redirect:/doctor/newatt";
+        return "redirect:/doctor/";
+//        return "redirect:/doctor";
     }
 
 //    @GetMapping("/stufrlist")
@@ -87,10 +109,11 @@ public class DoctorController {
         return modelAndView;
     }
 
-    @PostMapping( "liststufr")
+//    @GetMapping( "liststufr")
     public List<Student> getListStuFR(){
 
         List<Student> stuFRlist = new ArrayList<>();
+//        System.out.println("EXC.. ");
 
         List<String> attenceList = new ArrayList<>();
         String s = null;

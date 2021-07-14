@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+<!--	  <link rel="stylesheet" href="../static/project/login.css">-->
+  </head>
+  <body>
+    <div class="container" id="container">
+    	<div class="form-container sign-up-container">
+    		<form action="#">
+    			<h1>Enter User ID</h1>
+    			<input type="text" placeholder="User ID" />
+    			<button style="margin-top:1px;">Submit</button>
+    		</form>
+    	</div>
+    	<div class="form-container sign-in-container">
+    		<form action="#">
+    			<h1>Sign in</h1>
+    			<input type="email" placeholder="Email" />
+    			<input type="password" placeholder="Password" />
+    			<a href="#">Forgot your password ?</a>
+    			<button>Sign In</button>
+    		</form>
+    	</div>
+    	<div class="overlay-container">
+    		<div class="overlay">
+    			<div class="overlay-panel overlay-left">
+    				<h1>Camera Ready ?</h1>
+    				<p>This method requires using camera to identify your identity.</p>
+    				<button class="ghost" id="signIn">Try Another Method</button>
+    			</div>
+    			<div class="overlay-panel overlay-right">
+            <img style="height:40%;margin-bottom:10px;" src="../static/project/face.png" alt="">
+    				<h1>Login Using <br>Face Recognition</h1>
+    				<button class="ghost" id="signUp" style="margin-top:15px;">Let's Go !</button>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    <script type="text/javascript">
+      const signUpButton = document.getElementById('signUp');
+      const signInButton = document.getElementById('signIn');
+      const container = document.getElementById('container');
+
+      signUpButton.addEventListener('click', () => {
+          container.classList.add('right-panel-active');
+      });
+
+      signInButton.addEventListener('click', () => {
+          container.classList.remove('right-panel-active');
+      });
+    </script>
+  </body>
+</html>

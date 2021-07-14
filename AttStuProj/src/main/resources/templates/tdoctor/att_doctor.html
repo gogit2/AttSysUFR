@@ -21,17 +21,12 @@
         <br>
         <h5>FR is done</h5>
         <br>
-        <h5> Click button below to submit ATTENDANCE</h5>
+        <h5>Click button below to submit ATTENDANCE</h5>
         <br><br>
+    </div>
 
-<!--        <form  action="/doctor/newatt" th:objecte="${students}" method="Get">-->
-<!--            <input th:type="hidden"  th:object="${@doctorController.getListStuFR()}" />-->
-<!--            <button type="submit">Start Encoding </button>-->
-<!--        </form>-->
-        <p th:object="${@doctorController.getListStuFR()}" />
 
-        <br>
-
+    <div class="container">
         <form action="/doctor/saveatt" th:objecte="${attendance}" method="POST">
 
             <select th:field="${attendance.section}" >
@@ -55,8 +50,7 @@
                         th:text="${stu.stu_id}" >
                 </option>
             </select>
-<!--            <input type="text" placeholder="Choose NameStu" th:field="${doctor.active}">-->
-<!--            <input type="text" placeholder="Choose CourID" th:field="${doctor.password}">-->
+
             <button type="submit">Submit Attendance</button>
         </form>
     </div>
