@@ -1,7 +1,7 @@
 # AttSysUFR
 Attendance System using Face Recognition
 
-Used Tools:
-1- Python for running face-recgontion script
-2- Java (Spring Framework) for handling backend 
-3- HTML,CSS, Js for fronend
+Used Tools:<br />
+1- Python for running face-recgontion script <br />
+2- Java (Spring Framework) for handling backend <br />
+3- HTML,CSS, Js and Thymeleaf for fronend
